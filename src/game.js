@@ -11,15 +11,26 @@ hole.addEventListener("animationiteration", () => {
 });
 
 setInterval(function () {
-  var characterTop = parseInt(
+  let characterTop = parseInt(
     window.getComputedStyle(character).getPropertyValue("top")
   );
   if (jumping == 0) {
-    character.style.top = characterTop + 3 + "px";
+    character.style.top = characterTop + 7 + "px";
   }
 
-  if (characterTop > 450) {
-    alert("Game Over. Score = " + counter);
+  var blockLeft = parseInt(
+    window.getComputedStyle(block).getPropertyValue("left")
+  );
+  var holeTop = parseInt(window.getComputedStyle(hole).getPropertyValue("top"));
+  let = cTop = -(500 - characterTop);
+
+  if (
+    characterTop > 450 ||
+    (blockLeft < 50 &&
+      blockLeft > -100 &&
+      (cTop < holeTop || cTop > holeTop + 130))
+  ) {
+    alert("Game over. Score: " + counter);
     character.style.top = 100 + "px";
     counter = 0;
   }
@@ -45,3 +56,13 @@ const jump = () => {
     jumpCount++;
   }, 10);
 };
+
+document.addEventListener("keydown", (event) => {
+    if (event.code === "Space") {
+        jump();
+    }
+});
+
+
+
+
